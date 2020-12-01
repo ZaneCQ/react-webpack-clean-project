@@ -12,6 +12,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
+  mode: 'development',
   plugins: [
     // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -20,13 +21,20 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
-  // mode: 'production',
-  mode: 'development',
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader']
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+      },
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: ['babel-loader']
       }
     ]
   },
