@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import { Button } from 'antd';
 import _ from 'lodash';
-import printMe from './print.js';
+// import printMe from './print.js';
 import './styles.css';
 
 class App extends Component {
     onClick = () => {
-        console.log('button clicked')
+        console.log('button clicked');
     }
     render() {
         let greeting = `Hi, welcome to my simple project😀`;
@@ -22,6 +22,8 @@ class App extends Component {
 }
 
 ReactDom.render(<App />, document.getElementById('app'));
+
+// console.log('module:', module)
 /* if (module.hot) {
     module.hot.accept('./print.js', function () {
         console.log('Accepting the updated printMe module!');

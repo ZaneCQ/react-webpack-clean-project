@@ -13,7 +13,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
-  mode: 'development',
   module: {
     rules: [
       {
@@ -37,21 +36,6 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-            /* options: {
-              "presets": ["@babel/preset-env", "@babel/preset-react"],
-              "plugins": [
-                "@babel/plugin-transform-runtime",
-                "@babel/plugin-proposal-class-properties",
-                [
-                  "@babel/plugin-proposal-decorators",
-                  { "legacy": true }
-                ],
-                [
-                  "import",
-                  { "libraryName": "antd", "style": true }
-                ]
-              ]
-            } */
           }
         ]
       },
@@ -68,11 +52,10 @@ module.exports = {
       }
     ]
   },
-  // presets: ['@babel/preset-env', '@babel/preset-react'],
   plugins: [
-    // new CleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'My Project',
+      title: 'My project',
       filename: 'index.html',
       template: path.join(__dirname, 'src/index.html'),
       inject: 'body',
@@ -82,11 +65,4 @@ module.exports = {
   optimization: {
     namedModules: true
   },
-  // devtool: 'inline-source-map',
-  // devServer: {
-  //   contentBase: './dist',
-  //   port: 8080,
-  //   open: true,
-  //   hot: true,
-  // },
 };
