@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import { Button } from 'antd';
 import _ from 'lodash';
-// import printMe from './print.js';
 import './styles.css';
 
 class App extends Component {
@@ -10,25 +9,15 @@ class App extends Component {
         console.log('button clicked');
     }
     render() {
-        let greeting = `Hi, welcome to my simple project😀`;
+        let greeting = `Hi, welcome to my simple project😀 hhhhh`;
         console.log('done')
         return (
             <div>
                 <h1>{greeting}</h1>
-                <div><Button onClick={this.onClick}>Click</Button></div>
+                <div><Button type="primary" onClick={this.onClick}>Click Here</Button></div>
             </div>
         )
     }
 }
 
 ReactDom.render(<App />, document.getElementById('app'));
-
-// console.log('module:', module)
-/* if (module.hot) {
-    module.hot.accept('./print.js', function () {
-        console.log('Accepting the updated printMe module!');
-        document.body.removeChild(element);
-        element = component(); // Re-render the "component" to update the click handler
-        document.body.appendChild(element);
-    })
-} */
