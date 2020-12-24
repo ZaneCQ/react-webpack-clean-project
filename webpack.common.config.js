@@ -1,8 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
-// console.log('======dirname=======:', __dirname);
 
 module.exports = {
   entry: {
@@ -11,29 +11,15 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '',
-    chunkFilename: '[name].bundle.js',
+    publicPath: '/',
+    chunkFilename: '[name].bundle.[hash:5].js',
     // crossOriginLoading: 'use-credentials',
   },
+  target: 'web',
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
-      },
-      {
-        test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', {
-          loader: "less-loader",
-          options: {
-            lessOptions: {
-              javascriptEnabled: true
-            }
-          }
-        }]
-      },
-      {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)?$/,
         exclude: /node_modules/,
         use: [
           {
@@ -42,15 +28,54 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpe?g|gif)$/,
+        test: /\.(css|less)$/,
+        exclude: path.resolve(__dirname, 'node_modules'),
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { modules: { localIdentName: '[path][name]__[local]--[hash:base64:5]' } }
+          },
+          'postcss-loader',
+          {
+            loader: "less-loader",
+            options: { lessOptions: { javascriptEnabled: true }, sourceMap: true }
+          }
+        ]
+      },
+      {
+        test: /\.(css|less)$/,
+        exclude: path.resolve(__dirname, 'src'),
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { modules: false }
+          },
+          'postcss-loader',
+          {
+            loader: "less-loader",
+            options: { lessOptions: { javascriptEnabled: true }, sourceMap: true }
+          }
+        ]
+      },
+      {
+        test: /\.(png|svg|jpe?g|gif)$/,
         use: [
           {
             loader: 'url-loader',
-            options: {
-              limit: 8192
-            }
+            options: { limit: 8192 }
           }
         ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: 'file-loader'
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       }
     ]
   },
@@ -62,10 +87,15 @@ module.exports = {
       template: path.join(__dirname, 'src/index.html'),
       inject: 'body',
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[name].css',
+      ignoreOrder: false,
+    })
   ],
   optimization: {
-    namedModules: true,
+    namedModules: false,
     splitChunks: {
       chunks: 'all',
     }

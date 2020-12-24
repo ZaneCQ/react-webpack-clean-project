@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import { Button } from 'antd';
-import _ from 'lodash';
-import './styles.css';
+import style from './styles.less';
 
 class App extends Component {
     onClick = () => {
@@ -10,10 +9,10 @@ class App extends Component {
     }
     render() {
         let greeting = `Hi, welcome to my simple project😀 hhhhh`;
-        console.log('done')
+        console.log('done');
         return (
-            <div>
-                <h1>{greeting}</h1>
+            <div className={style['mainContainer']}>
+                <h1 className="normalColor">{greeting}</h1>
                 <div><Button type="primary" onClick={this.onClick}>Click Here</Button></div>
             </div>
         )
