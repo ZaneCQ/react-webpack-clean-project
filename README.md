@@ -1,6 +1,6 @@
 # react-webpack-clean-project
 
-这是一套自用的webpack通用配置，用于开发react项目，功能配置逐步添加中😊。
+这是一套个人的webpack5通用配置，用于开发react项目，功能配置逐步添加中😊。
 
 ## 已实现功能
 

@@ -18,6 +18,8 @@ app.use(express.static('dist'));
 /* app.get('/home', (req, res) => {
     res.send('Home');
 }); */
-app.listen(3000, function () {
+const port = 3000;
+app.listen(port, function () {
     console.log('Example app listening on port 3000!\n');
+    console.log(`localhost:${port}`);
 });

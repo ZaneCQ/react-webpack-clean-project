@@ -6,8 +6,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = merge(common, {
   mode: 'development',
-  // devtool: 'inline-source-map',
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'inline-source-map',
+  // devtool: 'cheap-module-eval-source-map',
   // performance: {
   //   hints: 'warning'
   // },
@@ -18,5 +18,9 @@ module.exports = merge(common, {
     contentBase: path.join(__dirname, 'dist'),
     hot: true,
     https: false,
+    open: true
   }
+  // optimization: {
+  //   usedExports: true,
+  // },
 });

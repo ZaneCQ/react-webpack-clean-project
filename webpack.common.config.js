@@ -25,7 +25,8 @@ module.exports = {
           {
             loader: 'babel-loader',
           }
-        ]
+        ],
+        // sideEffects: false // Tree Shaking - Remove the unused files
       },
       {
         test: /\.(css|less)$/,
@@ -95,7 +96,7 @@ module.exports = {
     })
   ],
   optimization: {
-    namedModules: false,
+    moduleIds: 'named',
     splitChunks: {
       chunks: 'all',
     }

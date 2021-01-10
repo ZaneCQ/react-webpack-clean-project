@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import { Button } from 'antd';
+import { Typography } from 'antd';
 import style from './styles.less';
+
+const { Title } = Typography;
 
 class App extends Component {
     onClick = () => {
         console.log('button clicked');
     }
     render() {
-        let greeting = `Hi, welcome to my simple project😀 hhhhh`;
-        console.log('done');
+        let greeting = `Hi 😀, this is my common webpack(V5.*) configuration for react projects.`;
         return (
             <div className={style['mainContainer']}>
-                <h1 className="normalColor">{greeting}</h1>
-                <div><Button type="primary" onClick={this.onClick}>Click Here</Button></div>
+                <Title>{greeting}</Title>
             </div>
         )
     }
