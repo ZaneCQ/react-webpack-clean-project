@@ -6,11 +6,8 @@ import style from './styles.less';
 const { Title } = Typography;
 
 class App extends Component {
-    onClick = () => {
-        console.log('button clicked');
-    }
     render() {
-        let greeting = `Hi 😀, this is my common webpack(V5.*) configuration for react projects.`;
+        let greeting = `Hi 😀, this is my common webpack5 configuration for react projects.`;
         return (
             <div className={style['mainContainer']}>
                 <Title>{greeting}</Title>
