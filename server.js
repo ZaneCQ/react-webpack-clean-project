@@ -10,14 +10,7 @@ app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath
 }));
  */
-app.get('/', (req, res) => {
-    console.log('path:', path.join(__dirname, 'dist', 'index.html'))
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
 app.use(express.static('dist'));
-/* app.get('/home', (req, res) => {
-    res.send('Home');
-}); */
 const port = 3000;
 app.listen(port, function () {
     console.log('Example app listening on port 3000!\n');

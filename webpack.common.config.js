@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -9,13 +10,12 @@ module.exports = {
     app: './src/index.js',
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].bundle.[contenthash:8].js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
-    chunkFilename: '[name].bundle.[hash:5].js',
+    chunkFilename: '[name].chunk.[contenthash:8].js',
     // crossOriginLoading: 'use-credentials',
   },
-  target: 'web',
+  cache: true,
   module: {
     rules: [
       {
@@ -25,8 +25,7 @@ module.exports = {
           {
             loader: 'babel-loader',
           }
-        ],
-        // sideEffects: false // Tree Shaking - Remove the unused files
+        ]
       },
       {
         test: /\.(css|less)$/,
@@ -35,7 +34,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: { modules: { localIdentName: '[path][name]__[local]--[hash:base64:5]' } }
+            options: { modules: { localIdentName: '[path][name]--[contenthash:8]' } }
           },
           'postcss-loader',
           {
@@ -65,7 +64,7 @@ module.exports = {
         use: [
           {
             loader: 'url-loader',
-            options: { limit: 8192 }
+            options: { limit: 8192, esModule: false }
           }
         ]
       },
@@ -93,12 +92,22 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[name].css',
       ignoreOrder: false,
-    })
+    }),
   ],
   optimization: {
     moduleIds: 'named',
     splitChunks: {
       chunks: 'all',
-    }
-  },
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+        }
+      }
+    },
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin(),
+    ]
+  }
 };
