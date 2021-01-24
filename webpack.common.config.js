@@ -15,6 +15,7 @@ module.exports = {
     chunkFilename: '[name].chunk.[contenthash:8].js',
     // crossOriginLoading: 'use-credentials',
   },
+  target: 'web',
   cache: true,
   module: {
     rules: [
