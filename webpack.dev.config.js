@@ -16,6 +16,6 @@ module.exports = merge(common, {
     contentBase: path.join(__dirname, 'dist'),
     hot: true,
     https: false,
-    open: true
+    open: false
   }
 });

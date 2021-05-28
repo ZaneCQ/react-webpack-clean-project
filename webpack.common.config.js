@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const MyPlugin = require('./src/plugins/MyPlugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -25,6 +26,15 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
+          }, 
+          {
+            loader: path.resolve(__dirname, 'src', 'loaders', 'my-loader'),
+            options: {
+              params: {
+                NAME: 'ZaneCQ',
+                CHARACTER: 'Customer',
+              }
+            }
           }
         ]
       },
@@ -94,6 +104,7 @@ module.exports = {
       chunkFilename: '[name].css',
       ignoreOrder: false,
     }),
+    new MyPlugin(),
   ],
   optimization: {
     moduleIds: 'named',

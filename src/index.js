@@ -11,6 +11,8 @@ class App extends Component {
         return (
             <div className={style['mainContainer']}>
                 <Title>{greeting}</Title>
+                <div>[NAME]</div>
+                <div>[CHARACTER]</div>
             </div>
         )
     }
