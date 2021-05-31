@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import { Typography } from 'antd';
 import style from './styles.less';
+/* const m = require('./test');
+console.log('m:', m);
+m.add();
+m.getCount(); */
 
 const { Title } = Typography;
 

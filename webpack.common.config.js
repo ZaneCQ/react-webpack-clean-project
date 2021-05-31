@@ -26,9 +26,9 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-          }, 
+          },
           {
-            loader: path.resolve(__dirname, 'src', 'loaders', 'my-loader'),
+            loader: path.resolve(__dirname, 'src', 'loaders', 'param-exchange-loader'),
             options: {
               params: {
                 NAME: 'ZaneCQ',
@@ -51,6 +51,10 @@ module.exports = {
           {
             loader: "less-loader",
             options: { lessOptions: { javascriptEnabled: true }, sourceMap: true }
+          },
+          {
+            loader: path.resolve(__dirname, 'src', 'loaders', 'custom-css-loader'),
+
           }
         ]
       },
